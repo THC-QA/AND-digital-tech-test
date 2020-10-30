@@ -35,8 +35,18 @@ resource "null_resource" "instance_wait" {
       command = "sleep 180"
     }
 }
-
 data "dns_a_record_set" "dns_record" {
   depends_on = [null_resource.instance_wait]
   host  = aws_elb.test_balancer.dns_name
+}
+resource "aws_route53_record" "www" {
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_elb.test_balancer.dns_name
+    zone_id                = aws_elb.test_balancer_id
+    evaluate_target_health = true
+  }
 }

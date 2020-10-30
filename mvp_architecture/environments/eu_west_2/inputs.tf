@@ -5,3 +5,4 @@ variable "environment" {
 variable "region" {
     default = "eu-west-2"
 }
+variable "domain_name" {}

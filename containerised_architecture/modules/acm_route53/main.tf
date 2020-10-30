@@ -42,7 +42,7 @@ resource "aws_acm_certificate_validation" "test_cert_val" {
 }
 
 resource "aws_lb_listener" "test_lb_listener" {
-  # ... other configuration ...
+  # need to test if I have money for domain
 
   certificate_arn = aws_acm_certificate_validation.test_cert_val.certificate_arn
 }
