@@ -20,7 +20,7 @@ Written in reference to the brief provided during the AND Digital interview proc
 
 ## Breakdown and MoSCoW Prioritisation
 
-###Load balanced web front end
+### Load balanced web front end
 
 **Must:** The app or page must be open to the web, and must be load balanced.
 
