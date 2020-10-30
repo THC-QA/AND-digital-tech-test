@@ -62,7 +62,7 @@ This requirement was extremely open to interpretation, and applying prioritisati
 
 **Could:** Enable encryption between web elements using AppMesh or similar microcontroller.
 
-**Would:** Enable dynamic trafic monitoring and policing.
+**Would:** Enable dynamic traffic monitoring and policing.
 
 ### Core requirements
 
@@ -90,7 +90,7 @@ Due to the week provided to complete the technical test, I chose to approach the
 
 ## What Do You Need To Run This?
 
-The various versions of this project will ask you for some information after navigating to the respective /eu_west_2/ folders and running `terraform init`, `terraform plan` and finally ```terraform apply`
+The various versions of this project will ask you for some information after navigating to the respective /eu_west_2/ folders and running `terraform init`, `terraform plan` and finally `terraform apply`
 
 All three versions will require you to input:
 
