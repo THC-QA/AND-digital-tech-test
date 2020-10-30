@@ -8,6 +8,18 @@ Written in reference to the brief provided during the AND Digital interview proc
 
 ## Table of Contents
 
+1. [The Brief](#the-brief)
+2. [Breakdown](#breakdown-and-moscow-prioritisation)
+    + [Load Balancer](#load-balanced-web-front-end)
+    + [Elements](#a-number-of-elements)
+    + [Security](#secure-web-page)
+    + [Core](#core-requirements)
+3. [Architecture Diagrams](#architecture)
+    + [MVP](#minimum-viable-product)
+    + [Containers](#containerised-architecture)
+    + [Serverless](#extension:-serverless-architecture)
+4. [Requirements](#what-do-you-need-to-run-this?)
+
 ## The Brief
 
 + Terraform a load balanced web front end in AWS, GCP or Azure.
@@ -76,4 +88,35 @@ Due to the week provided to complete the technical test, I chose to approach the
 
 ![alt text](https://i.imgur.com/5uZvx6q.png "Serverless Architecture for AND Digital Tech Test")
 
+## What Do You Need To Run This?
 
+The various versions of this project will ask you for some information after navigating to the respective /eu_west_2/ folders and running `terraform init`, `terraform plan` and finally ```terraform apply`
+
+All three versions will require you to input:
+
+1. Your AWS account ID
+2. The name of a key or key-path which you have created on the web interface
+3. A domain name which you can prove ownership of
+
+The 'Containerised Architecture' version of this project requires a somewhat more complicated installation and setup process, due to the inclusion of a CI/CD server and use of kubernetes.
+
+1. Clone down this repository.
+2. Create or login to your AWS account.
+3. Generate an AWS .pem key, downloading your copy and noting the name. Note: YOUR KEY MUST BE CREATED IN THE REGION YOU INTEND TO DEPLOY TO.
+4. Navigate to the containerised_architecture/environments/eu-west-2 folder of this directory, and place your copy of the AWS key here.
+5. Install terraform following [this guide](https://learn.hashicorp.com/terraform/getting-started/install.html).
+6. In the same folder, run the command `terraform init` followed by `terraform plan`.
+7. Provide the variables as requested by terraform, and check that no errors are thrown.
+8. Still in the folder, run the command `terraform apply`.
+9. Navigate to your AWS web console and follow the instructions to ssh to your newly created EC2 instance. This can be found by searching EC2 in the upper right search bar.
+10. On the EC2 server, run the command `sudo su jenkins`.
+    + Run the command `aws configure` inserting the credentials you used for terraform.
+11. Get the IP address of the instance that you're on.
+12. Open a web browser and paste it in the address bar using the format `ipaddress:8080`.
+    + `cat` initial password as directed on the Jenkins welcome page
+    + Install plugins and sign up to Jenkins as directed.
+    + Name the pipeline 'ANDskilstest'
+13. Using the guide found [here](https://embeddedartistry.com/blog/2017/12/21/jenkins-kick-off-a-ci-build-with-github-push-notifications/) configure your copy of the repository to allow webhooks.
+15. Completing the procedure, use the guide found [here](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline) to add the webhook to your Jenkins server.
+
+The 'Serverless Architecture' version of this project requires a few additional pieces of information from the user, in the form of access and secret keys, in addition to editing of the inputs.tf file to reflect the domain that you own. Conflict is potential, if unlikely, due to the globally unique requirement for bucket names.
