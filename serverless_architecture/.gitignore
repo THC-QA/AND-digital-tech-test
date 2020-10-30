@@ -1,0 +1,10 @@
+environments/eu_west_2/.terraform/*/*/*
+environments/eu_west_2/*.tfstate
+environments/eu_west_2/*.tfstate.*
+
+environments/eu_west_2/.terraform.tfstate.lock.info
+environments/eu_west_2/terraform.tfstate
+environments/eu_west_2/terraform.tfstate.backup
+environments/eu_west_2/.terraform/modules/modules.json
+environments/eu_west_2/.terraform/plugins/linux_amd64/lock.json
+environments/eu_west_2/.terraform/plugins/linux_amd64/terraform-provider-aws_v2.59.0_x4
