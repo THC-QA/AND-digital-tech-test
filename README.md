@@ -58,10 +58,22 @@ Outside of the prioritisation metric, I've chosen to consider the remaining requ
 
 ## Architecture
 
+Due to the week provided to complete the technical test, I chose to approach the architecture of the project in three seperate ways.
+
+1. The first layout fulfils the minimum viable product requirements of the brief.
+2. The second starts to involve containerisation and provides a CI/CD server. This enables the project to be more extensible.
+3. The third layout pulls away from the specifics of the brief to approach the 'spirit' of a single page web deployment from a completely different angle, whilst still showcasing Terraform skills. Whilst not necessary for the task, I felt it would be interesting to compare a serverless layout of the same project to traditional architecture, particularly through the metrics of cost and simplicity.
+
 ### Minimum Viable Product
+
+![alt text](https://i.imgur.com/MezyNI5.png "Minimum Viable Product Architecture for AND Digital Tech Test")
 
 ### Containerised Architecture
 
+![alt text](https://i.imgur.com/is3MBKC.png "Containerised Architecture for AND Digital Tech Test")
+
 ### Extension: Serverless Architecture
+
+![alt text](https://i.imgur.com/5uZvx6q.png "Serverless Architecture for AND Digital Tech Test")
 
 
