@@ -36,15 +36,15 @@ resource "null_resource" "test" {
     
     inline = [
 
-      "until [ id -u jenkins >/dev/null 2>&1 ];"
-      "do"
-      "sleep 5"
-      "done"
+      "until [ id -u jenkins >/dev/null 2>&1 ];",
+      "do",
+      "sleep 5",
+      "done",
 
       "echo 'export CERT_ARN=${module.acm-route53.cert-arn}' >> /var/lib/jenkins/.bashrc",
       "echo 'export DOMAIN_NAME=${var.domain-name}' >> /var/lib/jenkins/.bashrc",
 
-      "sudo chown jenkins:jenkins /var/lib/jenkins/.bashrc"
+      "sudo chown jenkins:jenkins /var/lib/jenkins/.bashrc",
       "sudo chmod 444 /var/lib/jenkins/.bashrc"
     ]
   }

@@ -1,12 +1,13 @@
 resource "aws_elb" "test_balancer" {
   name                      = "test_balancer"
   security_groups           = var.balancer_security_group_ids
-  subnets                   = [var.subnet1_id, var.subnet2_id]
+  subnets                   = [var.pub_sub_1_id, var.pub_sub_2_id]
   cross_zone_load_balancing = true
   
   listener {
     lb_port = 80
-    lb_protocol = "http"
+    lb_protocol = "https"
+    ssl_certificate_id = var.certificate_arn
     instance_port = "80"
     instance_protocol = "http"
   } 

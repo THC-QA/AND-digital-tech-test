@@ -6,10 +6,10 @@ resource "aws_autoscaling_group" "test_scale" {
   max_size             = 5
 
   health_check_type    = "ELB"
-  load_balancers= [var.elb_id]
+  load_balancers= [var.balancer_id]
 
   launch_configuration = var.launch_configuration_name
-  availability_zones = [var.subnet1_id, var.subnet2_id]
+  availability_zones = [var.pub_sub_1_id, var.pub_sub_2_id]
 
   enabled_metrics = [
     "GroupMinSize",
@@ -21,7 +21,7 @@ resource "aws_autoscaling_group" "test_scale" {
 
   metrics_granularity="1Minute"
 
-  vpc_zone_identifier  = [var.subnet1_id, var.subnet2_id]
+  vpc_zone_identifier  = [var.pub_sub_1_id, var.pub_sub_2_id]
 
   lifecycle {
     create_before_destroy = true
