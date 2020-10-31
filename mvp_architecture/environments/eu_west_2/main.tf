@@ -3,7 +3,7 @@ module "test_vpc" {
   region = var.region
 }
 module "test_security_groups" {
-  source        = "../../modulessecurity_groups"
+  source        = "../../modules/security_groups"
   region        = var.region
   cidr_block    = "0.0.0.0/0" # Find way of restricting to just ELB/launch point
   vpc_id        = module.test_vpc.vpc_id
