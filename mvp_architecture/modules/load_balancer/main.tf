@@ -28,7 +28,7 @@ resource "aws_elb" "test_balancer" {
 resource "null_resource" "instance_wait" {
     depends_on = [ aws_elb.test_balancer ]
     triggers = {
-      lb_dns_name = var.lb_dns_name
+      lb_dns_name = aws_elb.test_balancer.dns_name
     }
 
     provisioner "local-exec" {
