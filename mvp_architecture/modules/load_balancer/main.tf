@@ -1,5 +1,5 @@
 resource "aws_elb" "test_balancer" {
-  name                      = "test_balancer"
+  name                      = "testbalancer"
   security_groups           = var.balancer_security_group_ids
   subnets                   = [var.pub_sub_1_id, var.pub_sub_2_id]
   cross_zone_load_balancing = true

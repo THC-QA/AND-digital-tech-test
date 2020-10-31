@@ -8,5 +8,5 @@ resource "aws_launch_configuration" "nginx_instance" {
 }
 
 data "template_file" "frontend" {
-  template = file("./Launch_configuration/frontend.sh")
+  template = file("../../modules/ec2/frontend.sh")
 }

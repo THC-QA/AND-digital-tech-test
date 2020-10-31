@@ -19,8 +19,8 @@ module "auto_scaling" {
     region                      = var.region
     launch_configuration_name   = module.test_launch_configuration.launch_config_name
     balancer_id                 = module.test_load_balancer.balancer_id 
-    pub_sub_1_id                = module.vpc.pub_sub_1_id
-    pub_sub_2_id                 = module.vpc.pub_sub_2_id
+    pub_sub_1_id                = module.test_vpc.pub_sub_1_id
+    pub_sub_2_id                 = module.test_vpc.pub_sub_2_id
 }
 module "acm_route53" {
     source      = "../../modules/acm_route53"
