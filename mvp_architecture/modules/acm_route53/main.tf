@@ -8,9 +8,9 @@ resource "aws_acm_certificate" "test_certificate" {
     create_before_destroy = true
   }
 }
-data "aws_route53_zone" "test_zone" {
+resource "aws_route53_zone" "test_zone" {
   name         = "${var.domain_name}"
-  private_zone = true
+  private_zone = false
   vpc {
     vpc_id = "${var.vpc_id}"
   }
