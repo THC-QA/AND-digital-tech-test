@@ -10,7 +10,7 @@ resource "aws_security_group" "nginx_sg" {
             from_port = port.value
             protocol = "tcp"
             to_port = port.value
-            cidr_blocks = var.cidr_block
+            cidr_blocks = [var.cidr_block]
         }
     }
     egress {

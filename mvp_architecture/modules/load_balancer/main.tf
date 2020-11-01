@@ -5,7 +5,7 @@ resource "aws_elb" "test_balancer" {
   cross_zone_load_balancing = true
   
   listener {
-    lb_port = 80
+    lb_port = "443"
     lb_protocol = "https"
     ssl_certificate_id = var.certificate_arn
     instance_port = "80"

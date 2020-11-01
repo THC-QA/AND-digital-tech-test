@@ -1,3 +1,13 @@
+resource "aws_acm_certificate" "test_certificate" {
+  domain_name       = "${var.domain_name}"
+  validation_method = "DNS"
+  tags = {
+    Environment = "test"
+  }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 resource "aws_cloudfront_distribution" "site" {
   enabled             = true
   default_root_object = "index.html"
@@ -9,7 +19,9 @@ resource "aws_cloudfront_distribution" "site" {
     }
   }
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.test_certificate.arn
+    ssl_support_method = sni-only
+    minimum_protocol_version = TLSv1
   }
   custom_error_response {
     error_code          = 403

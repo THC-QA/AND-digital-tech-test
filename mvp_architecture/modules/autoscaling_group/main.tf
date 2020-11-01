@@ -9,7 +9,6 @@ resource "aws_autoscaling_group" "test_scale" {
   load_balancers= [var.balancer_id]
 
   launch_configuration = var.launch_configuration_name
-  availability_zones = [var.pub_sub_1_id, var.pub_sub_2_id]
 
   enabled_metrics = [
     "GroupMinSize",
