@@ -41,8 +41,8 @@ resource "aws_acm_certificate_validation" "test_cert_val" {
   validation_record_fqdns = [for record in aws_route53_record.test_route_record : record.fqdn]
 }
 
-resource "aws_lb_listener" "test_lb_listener" {
-  # need to test if I have money for domain
+# resource "aws_lb_listener" "test_lb_listener" {
+#   # need to test if I have money for domain
 
-  certificate_arn = aws_acm_certificate_validation.test_cert_val.certificate_arn
-}
+#   certificate_arn = aws_acm_certificate_validation.test_cert_val.certificate_arn
+# } # This step may need to be finished on the web console as the load balancer doesn't exist until kubernetes runs
