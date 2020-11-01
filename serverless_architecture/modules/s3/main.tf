@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "site" {
   bucket        = "${var.s3_bucket_name}"
-  acl           = "private"
+  acl           = "public-read"
   force_destroy = true
   policy = <<EOF
 {
@@ -33,4 +33,5 @@ resource "aws_s3_bucket_object" "object" {
   bucket = aws_s3_bucket.site.id
   key    = "index.html"
   source = "/home/ubuntu/AND-digital-tech-test/serverless_architecture/modules/s3/index.html" # requires absolute path
+  content_type = "text/html"
 }
