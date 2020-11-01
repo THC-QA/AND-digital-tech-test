@@ -5,7 +5,7 @@ variable "region"               {
     default = "eu-west-2"
 }
 variable "s3_bucket_name"       {
-    default = "and-digital-tech-test.yourdomain.net"
+#    default = "and-digital-tech-test.yourdomain.net"
 }
 variable "s3_bucket_env"           {
     default = "Development"
