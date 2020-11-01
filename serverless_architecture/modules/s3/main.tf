@@ -30,7 +30,7 @@ EOF
   }
 }
 resource "aws_s3_bucket_object" "object" {
-  bucket = var.s3_bucket_name
+  bucket = "aws_s3_bucket.${var.s3_bucket_name}.id"
   key    = "index.html"
   source = "./index.html"
 }
