@@ -26,6 +26,11 @@ resource "aws_s3_bucket" "site" {
 EOF
   website {
     index_document = "index.html"
-    error_document = "404.html"
+#    error_document = "error.html"
   }
+}
+resource "aws_s3_bucket_object" "object" {
+  bucket = var.s3_bucket_name
+  key    = "index.html"
+  source = "./index.html"
 }
