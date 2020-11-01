@@ -22,19 +22,20 @@ module "auto_scaling" {
     pub_sub_1_id                = module.test_vpc.pub_sub_1_id
     pub_sub_2_id                 = module.test_vpc.pub_sub_2_id
 }
-module "acm_route53" {
-    source      = "../../modules/acm_route53"
-    region      = var.region
-    domain_name = var.domain_name
-    vpc_id      = module.test_vpc.vpc_id
-}
 module "test_load_balancer" {
     source                      = "../../modules/load_balancer"
     region                      = var.region
     pub_sub_1_id                = module.test_vpc.pub_sub_1_id
     pub_sub_2_id                = module.test_vpc.pub_sub_2_id
     certificate_arn             = module.acm_route53.cert_arn
-    route53_zone_id             = module.acm_route53.route53_zone_id
     domain_name                 = var.domain_name
     balancer_security_group_ids = ["${module.test_security_groups.balancer_sg_id}"]
+}
+module "acm_route53" {
+    source            = "../../modules/acm_route53"
+    region            = var.region
+    domain_name       = var.domain_name
+    balancer_dns_name = module.test_load_balancer.balancer_dns_name
+    balancer_id       = module.test_load_balancer.balancer_id
+    vpc_id            = module.test_vpc.vpc_id
 }

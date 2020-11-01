@@ -10,9 +10,20 @@ resource "aws_acm_certificate" "test_certificate" {
 }
 resource "aws_route53_zone" "test_zone" {
   name         = "${var.domain_name}"
-  private_zone = false
+  # private_zone = false
   vpc {
     vpc_id = "${var.vpc_id}"
+  }
+}
+resource "aws_route53_record" "www" {
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = var.balancer_dns_name
+    zone_id                = var.balancer_id
+    evaluate_target_health = true
   }
 }
 resource "aws_acm_certificate_validation" "test_cert_val" {
