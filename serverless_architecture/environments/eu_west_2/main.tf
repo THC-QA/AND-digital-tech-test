@@ -21,6 +21,6 @@ module "route53" {
     region                  = var.region
     hosted_zone             = var.hosted_zone
     domain                  = var.domain
-    subdomain               = var.subdomain
+#    subdomain               = var.subdomain
     cloudfront_domain_name  = module.cloudfront.cloudfront_domain_name
 }
