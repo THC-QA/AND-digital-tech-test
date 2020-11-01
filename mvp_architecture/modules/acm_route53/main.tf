@@ -16,7 +16,7 @@ resource "aws_route53_zone" "test_zone" {
   }
 }
 resource "aws_route53_record" "www" {
-  zone_id = var.route53_zone_id
+  zone_id = aws_route53_zone.test_zone.zone_id
   name    = var.domain_name
   type    = "A"
 
