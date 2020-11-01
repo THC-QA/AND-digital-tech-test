@@ -9,7 +9,7 @@ variable "region"               {
 variable "s3_bucket_name"       {
     default = "and-digital-tech-test.yourdomain.net"
 }
-variable "bucket_env"           {
+variable "s3_bucket_env"           {
     default = "Development"
 }
 variable "domain"               {} # domain that you own eg "yourdomain.net"
