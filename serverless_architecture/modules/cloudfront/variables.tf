@@ -1,3 +1,4 @@
+variable "domain"          {}
 variable "bucket_domain_name"   {}
 variable "s3_bucket_name"       {}
 variable "cache_default_ttl"    {}

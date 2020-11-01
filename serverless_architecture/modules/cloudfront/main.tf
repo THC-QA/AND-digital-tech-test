@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "test_certificate" {
-  domain_name       = "${var.domain_name}"
+  domain_name       = "${var.domain}"
   validation_method = "DNS"
   tags = {
     Environment = "test"

@@ -1,6 +1,7 @@
  module "cloudfront" {
     source              = "../../modules/cloudfront"
     region              = var.region
+    domain              = var.domain
     bucket_domain_name  = module.s3.bucket_domain_name
     s3_bucket_name      = var.s3_bucket_name
     s3_bucket_env       = var.s3_bucket_env
