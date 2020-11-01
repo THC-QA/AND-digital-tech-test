@@ -20,8 +20,8 @@ resource "aws_cloudfront_distribution" "site" {
   }
   viewer_certificate {
     acm_certificate_arn = aws_acm_certificate.test_certificate.arn
-    ssl_support_method = sni-only
-    minimum_protocol_version = TLSv1
+    ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1"
   }
   custom_error_response {
     error_code          = 403
