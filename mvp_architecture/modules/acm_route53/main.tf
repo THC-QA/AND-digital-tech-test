@@ -28,5 +28,5 @@ resource "aws_route53_record" "www" {
 }
 resource "aws_acm_certificate_validation" "test_cert_val" {
   certificate_arn         = aws_acm_certificate.test_certificate.arn
-  validation_record_fqdns = [for record in aws_route53_record.test_route_record : record.fqdn]
+  validation_record_fqdns = [for record in aws_route53_record.www : record.fqdn]
 }

@@ -35,7 +35,7 @@ module "acm_route53" {
     source            = "../../modules/acm_route53"
     region            = var.region
     domain_name       = var.domain_name
-    balancer_dns_name = module.test_load_balancer.balancer_dns_name
+    balancer_dns_name = module.test_load_balancer.balancer_dns
     balancer_id       = module.test_load_balancer.balancer_id
     vpc_id            = module.test_vpc.vpc_id
 }
