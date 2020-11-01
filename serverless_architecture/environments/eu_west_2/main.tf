@@ -5,6 +5,7 @@
     bucket_domain_name  = module.s3.bucket_domain_name
     s3_bucket_name      = var.s3_bucket_name
     s3_bucket_env       = var.s3_bucket_env
+    cert_arn            = module.route53.cert_arn
     cache_default_ttl   = var.cache_default_ttl
     cache_max_ttl       = var.cache_max_ttl
     project_key         = var.project_key

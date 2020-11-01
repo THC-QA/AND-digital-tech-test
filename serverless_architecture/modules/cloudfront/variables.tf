@@ -1,6 +1,7 @@
 variable "domain"          {}
 variable "bucket_domain_name"   {}
 variable "s3_bucket_name"       {}
+variable "cert_arn"             {}
 variable "cache_default_ttl"    {}
 variable "cache_max_ttl"        {}
 variable "s3_bucket_env"        {}

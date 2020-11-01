@@ -28,8 +28,8 @@ resource "aws_security_group" "balancer_sg" {
     vpc_id = var.vpc_id
 
     ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = [80,443]
+    to_port     = [80,443]
     protocol    = "tcp"
     cidr_blocks = var.cidr_block_open
   }
