@@ -32,5 +32,5 @@ EOF
 resource "aws_s3_bucket_object" "object" {
   bucket = aws_s3_bucket.site.id
   key    = "index.html"
-  source = "./index.html"
+  source = "/home/ubuntu/AND-digital-tech-test/serverless_architecture/modules/s3/index.html" # requires absolute path
 }
