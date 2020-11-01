@@ -11,9 +11,9 @@ resource "aws_acm_certificate" "test_certificate" {
   }
 }
 
-data "aws_route53_zone" "test_zone" {
+resource "aws_route53_zone" "test_zone" {
   name         = "${var.domain-name}"
-  private_zone = false
+  # private_zone = false
   vpc {
     vpc_id = "${var.vpc_id}"
   }
