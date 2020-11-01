@@ -1,5 +1,5 @@
 output "cert_arn" {
-  value       = aws_acm_certificate_validation.test_cert_val.arn
+  value       = aws_acm_certificate_validation.test_cert_val.certificate_arn
   description = "The ARN of the generated ACM certificate"
 }
 # output "route53_zone_id" {
