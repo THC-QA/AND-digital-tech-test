@@ -4,7 +4,7 @@ variable "project_key"          {
 variable "aws_access_key"       {}
 variable "aws_secret_key"       {}
 variable "region"               {
-    default = "eu_west_1" # check region availability
+    default = "eu-west-2"
 }
 variable "s3_bucket_name"       {
     default = "and-digital-tech-test.yourdomain.net"
