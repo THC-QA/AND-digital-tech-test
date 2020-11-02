@@ -82,23 +82,31 @@ Due to the week provided to complete the technical test, I chose to approach the
 
 ![alt text](https://i.imgur.com/MezyNI5.png "Minimum Viable Product Architecture for AND Digital Tech Test")
 
+This represents the simplest and arguably cleanest fully compliant interpretation of the brief. The certificate manager alongside Route 53 provides security and https functionality. I'd chosen to use a 'classic' load balancer due to familiarity, but a more recent 'application' load balancer could be easily substituted. Though two instances were mandatory, the auto-scaling group scales to odd values in order to allow quorum polling in the event of node loss.
+
 ### Containerised Architecture
 
 ![alt text](https://i.imgur.com/is3MBKC.png "Containerised Architecture for AND Digital Tech Test")
+
+Still fulfilling all requirements of the brief, the backbone of this layout is very similar to the MVP version. The routing and security functions almost identically. However; in the interests of flexibility, DevOps best practices, and the potential for expansion as a microservice network, the structure focuses on containerisation via Kubernetes. A CI/CD server has been included using Jenkins, and the Kubernetes manifest is automatically revised to allow extensive automation of the deployment process.
 
 ### Extension: Serverless Architecture
 
 ![alt text](https://i.imgur.com/5uZvx6q.png "Serverless Architecture for AND Digital Tech Test")
 
+Addressing more the spirit of the brief than its requirements, for the serverless architecture, I really wanted to stress the cost reduction and efficiency. Using the AWS cost-calculator; the monthly cost for this setup, assuming near-million hit traffic, is only around 6 dollars per month. The single page layout (and potential for error page expansion or use of redirect objects) allows for very simple maintenance and approach by non-technical personnel. Use of AngularJS or similar could add functionality to the page with very little additional load or storage.
+
 ## What Do You Need To Run This?
 
 The various versions of this project will ask you for some information after navigating to the respective /eu_west_2/ folders and running `terraform init`, `terraform plan` and finally `terraform apply`
 
-All three versions will require you to input:
+All three versions will require you to possess:
 
 1. An AWS account.
 2. [Installing](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and setting up the AWS-cli so that a .aws/credentials folder is created.
 3. A domain name which you can prove ownership of.
+
+And to provide the information as requested by the terraform input prompts.
 
 The 'Containerised Architecture' version of this project requires a somewhat more complicated installation and setup process, due to the inclusion of a CI/CD server and use of kubernetes.
 
@@ -123,16 +131,17 @@ The 'Containerised Architecture' version of this project requires a somewhat mor
 16. Log in to the AWS console and navigate to Route 53.
 17. Create an Alias Record with the following information:
 
-``` resource "aws_route53_record" "balancer" {
-   zone_id = aws_route53_zone.test_zone.zone_id
-   name    = var.domain-name
-   type    = "A"
-   alias {
-     name                   = var.balancer_dns_name
-     zone_id                = var.balancer_id
-     evaluate_target_health = true
-   }
- }
+```resource "aws_route53_record" "balancer" {
+  resource "aws_route53_record" "balancer" {
+  zone_id = aws_route53_zone.test_zone.zone_id
+  name    = var.domain-name
+  type    = "A"
+  alias {
+    name                   = var.balancer_dns_name
+    zone_id                = var.balancer_id
+    evaluate_target_health = true
+  }
+}
  ```
 
 Some versions of this project require the editing of input.tf or main.tf files in the /eu-west-2/ folder in order to name the pem-keys used to connect to particular instances.
