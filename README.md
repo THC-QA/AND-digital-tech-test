@@ -131,8 +131,8 @@ The 'Containerised Architecture' version of this project requires a somewhat mor
 16. Log in to the AWS console and navigate to Route 53.
 17. Check for or create an Alias Record with the following information: (May have been fixed)
 
-```resource "aws_route53_record" "balancer" {
-  resource "aws_route53_record" "balancer" {
+```
+resource "aws_route53_record" "balancer" {
   zone_id = -PICK ZONE FROM LIST-
   name    = -DOMAIN NAME THAT YOU OWN-
   type    = "A"
@@ -150,9 +150,16 @@ Some versions of this project require the editing of input.tf or main.tf files i
 
 Though this project has gone well, and the website successfully launches on both the MVP and Serverless implementations, I feel there are still a number of improvements that could be readily made.
 
-```The 'Containerised' version of this project generated a large number of issues for me, chief amongst which is the way in which EKS nodes and Kubernetes itself interface with the AWS Load Balancers. Despite NGINX acting as 'load balancer' for the cluster, and the potential to use its reverse-proxy capabilities to add on more complex front and back ends, AWS also self-generates a virtualised load balancer to interface with its endpoint. This unfortunately means that the alias routing records that should allow connection between Route 53, the domain name, and the containers, can't be created from Terraform.
+```
+The 'Containerised' version of this project generated a large number of issues for me, chief amongst which is the way in
+which EKS nodes and Kubernetes itself interface with the AWS Load Balancers. Despite NGINX acting as 'load balancer' for
+the cluster, and the potential to use its reverse-proxy capabilities to add on more complex front and back ends, AWS also
+self-generates a virtualised load balancer to interface with its endpoint. This unfortunately means that the alias routing
+records that should allow connection between Route 53, the domain name, and the containers, can't be created from Terraform.
 
-Currently, they are required to be manually added after the rest of the project is launched, and I view this as contrary to the desire for more efficient automation of layout and deployment. I have not yet found a way around this problem, but I believe some more creative use of local-exec blocks and data sources might allow for a work-around.
+Currently, they are required to be manually added after the rest of the project is launched, and I view this as contrary to
+the desire for more efficient automation of layout and deployment. I have not yet found a way around this problem, but I
+believe some more creative use of local-exec blocks and data sources might allow for a work-around.
 ```
 
 The above section may have been fixed by a recent update to the external-dns Kubernetes alpha feature.
