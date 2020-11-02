@@ -19,6 +19,8 @@ Written in reference to the brief provided during the AND Digital interview proc
     + [Containers](#containerised-architecture)
     + [Serverless](#extension:-serverless-architecture)
 4. [Requirements](#what-do-you-need-to-run-this?)
+5. [Improvements](#improvements)
+6. [Thanks](#thanks)
 
 ## The Brief
 
@@ -94,9 +96,9 @@ The various versions of this project will ask you for some information after nav
 
 All three versions will require you to input:
 
-1. Your AWS account ID
-2. The name of a key or key-path which you have created on the web interface
-3. A domain name which you can prove ownership of
+1. An AWS account.
+2. [Installing](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and setting up the AWS-cli so that a .aws/credentials folder is created.
+3. A domain name which you can prove ownership of.
 
 The 'Containerised Architecture' version of this project requires a somewhat more complicated installation and setup process, due to the inclusion of a CI/CD server and use of kubernetes.
 
@@ -118,5 +120,39 @@ The 'Containerised Architecture' version of this project requires a somewhat mor
     + Name the pipeline 'ANDskilstest'
 13. Using the guide found [here](https://embeddedartistry.com/blog/2017/12/21/jenkins-kick-off-a-ci-build-with-github-push-notifications/) configure your copy of the repository to allow webhooks.
 15. Completing the procedure, use the guide found [here](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline) to add the webhook to your Jenkins server.
+16. Log in to the AWS console and navigate to Route 53.
+17. Create an Alias Record with the following information:
 
-The 'Serverless Architecture' version of this project requires a few additional pieces of information from the user, in the form of access and secret keys, in addition to editing of the inputs.tf file to reflect the domain that you own. Conflict is potential, if unlikely, due to the globally unique requirement for bucket names.
+``` resource "aws_route53_record" "balancer" {
+   zone_id = aws_route53_zone.test_zone.zone_id
+   name    = var.domain-name
+   type    = "A"
+   alias {
+     name                   = var.balancer_dns_name
+     zone_id                = var.balancer_id
+     evaluate_target_health = true
+   }
+ }
+ ```
+
+Some versions of this project require the editing of input.tf or main.tf files in the /eu-west-2/ folder in order to name the pem-keys used to connect to particular instances.
+
+## Improvements
+
+Though this project has gone well, and the website successfully launches on both the MVP and Serverless implementations, I feel there are still a number of improvements that could be readily made.
+
+The 'Containerised' version of this project generated a large number of issues for me, chief amongst which is the way in which EKS nodes and Kubernetes itself interface with the AWS Load Balancers. Despite NGINX acting as 'load balancer' for the cluster, and the potential to use its reverse-proxy capabilities to add on more complex front and back ends, AWS also self-generates a virtualised load balancer to interface with its endpoint. This unfortunately means that the alias routing records that should allow connection between Route 53, the domain name, and the containers, can't be created from Terraform.
+
+Currently, they are required to be manually added after the rest of the project is launched, and I view this as contrary to the desire for more efficient automation of layout and deployment. I have not yet found a way around this problem, but I believe some more creative use of local-exec blocks and data sources might allow for a work-around.
+
+![Frontend confirmation screenshot](https://i.imgur.com/5PWkUsK.png "Frontend confirmation screenshot")
+
+As can be seen from the confirmation screenshot, the current aesthetics of the front end are not really even at the 'wireframe' stage of design. Sadly, due to the relatively short (Thursday/Friday/Sunday) time available, the front end and its functionality was not prioritised.
+
+It might be nice to come back at some point to revisit the design and functionality of small deployment projects such as this.
+
+## Thanks
+
+Overall, this has been a fun project to have the opportunity to engage with. I've learnt some interesting things about the interface between Terraform and various other resources and programs, and enjoyed myself.
+
+I'd like to thank AND Digital for giving me this opportunity regardless of the outcome, and also thank a long-suffering friend for listening to me debug it at the weekend.
