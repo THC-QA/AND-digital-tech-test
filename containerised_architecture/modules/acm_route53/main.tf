@@ -13,10 +13,6 @@ resource "aws_acm_certificate" "test_certificate" {
 
 resource "aws_route53_zone" "test_zone" {
   name         = "${var.domain-name}"
-  # private_zone = false
-  vpc {
-    vpc_id = "${var.vpc_id}"
-  }
 }
 
 resource "aws_route53_record" "test_route_record" {
@@ -40,9 +36,18 @@ resource "aws_acm_certificate_validation" "test_cert_val" {
   certificate_arn         = aws_acm_certificate.test_certificate.arn
   validation_record_fqdns = [for record in aws_route53_record.test_route_record : record.fqdn]
 }
-
-# resource "aws_lb_listener" "test_lb_listener" {
-#   # need to test if I have money for domain
-
-#   certificate_arn = aws_acm_certificate_validation.test_cert_val.certificate_arn
-# } # This step may need to be finished on the web console as the load balancer doesn't exist until kubernetes runs
+############ Load Balancer Paradox ############
+#
+# Record must be manually created as the load balancer
+# for EKS is automatically created AFTER pod deployment
+#
+# resource "aws_route53_record" "balancer" {
+#   zone_id = aws_route53_zone.test_zone.zone_id
+#   name    = var.domain-name
+#   type    = "A"
+#   alias {
+#     name                   = var.balancer_dns_name
+#     zone_id                = var.balancer_id
+#     evaluate_target_health = true
+#   }
+# }
